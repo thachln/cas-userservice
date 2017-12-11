@@ -26,7 +26,12 @@ public class CasUserDetails implements UserDetails {
     public Collection<? extends GrantedAuthority> getAuthorities() {
 
         Collection<AppRole> roles = new ArrayList<AppRole>(1);
-        roles.add(AppRole.USER);
+        
+        if ("admin".equalsIgnoreCase(username)) {
+            roles.add(AppRole.ADMIN);
+        } else {
+            roles.add(AppRole.USER);
+        }
 
         return roles;
     }
